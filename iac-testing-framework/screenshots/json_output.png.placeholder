@@ -1,0 +1,35 @@
+# Framework JSON Report Output
+# This is a placeholder for json_output.png
+# MSc Caption: Figure X.X: Complete framework JSON output showing combined static analysis and policy compliance results
+
+# Expected Content:
+# {
+  "report_structure": {
+    "analysis_timestamp": "2025-07-17T10:30:00Z",
+    "terraform_directory": "./static_analysis/examples",
+    "analysis_type": "combined",
+    "static_analysis": {
+      "status": "success",
+      "terraform_files_found": 1,
+      "summary": {
+        "total_issues": 4,
+        "validation_passed": true,
+        "overall_status": "NEEDS_ATTENTION"
+      }
+    },
+    "policy_compliance": {
+      "status": "success",
+      "total_policies": 4,
+      "passed_policies": 2,
+      "failed_policies": 2,
+      "summary": {
+        "compliance_score": 50.0,
+        "overall_status": "FAILED"
+      }
+    },
+    "summary": {
+      "total_checks": 8,
+      "overall_status": "NEEDS_ATTENTION"
+    }
+  }
+}

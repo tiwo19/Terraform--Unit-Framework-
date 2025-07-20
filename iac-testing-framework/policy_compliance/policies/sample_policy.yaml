@@ -1,0 +1,52 @@
+# Sample policy file for Terraform compliance checking
+# This file demonstrates how to define policies for infrastructure compliance
+
+policies:
+  - name: "require_encryption"
+    description: "All storage resources must be encrypted"
+    resource_types:
+      - "aws_s3_bucket"
+      - "aws_ebs_volume"
+      - "aws_rds_instance"
+    rules:
+      - property: "encryption"
+        required: true
+      - property: "encrypted"
+        required: true
+        value: true
+
+  - name: "tag_compliance"
+    description: "All resources must have required tags"
+    resource_types:
+      - "aws_instance"
+      - "aws_s3_bucket"
+      - "aws_security_group"
+    rules:
+      - property: "tags"
+        required: true
+        required_keys:
+          - "Environment"
+          - "Owner"
+          - "Project"
+
+  - name: "security_group_rules"
+    description: "Security groups must not allow unrestricted access"
+    resource_types:
+      - "aws_security_group"
+    rules:
+      - property: "ingress"
+        restrictions:
+          - cidr_blocks: ["0.0.0.0/0"]
+            ports: [22, 3389]
+            allowed: false
+
+  - name: "instance_type_compliance"
+    description: "Only approved instance types are allowed"
+    resource_types:
+      - "aws_instance"
+    rules:
+      - property: "instance_type"
+        allowed_values:
+          - "t3.micro"
+          - "t3.small"
+          - "t3.medium"

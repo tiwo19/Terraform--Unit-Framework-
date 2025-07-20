@@ -1,0 +1,35 @@
+# Policy Compliance Check Results
+# This is a placeholder for policy_compliance_demo.png
+# MSc Caption: Figure X.X: Policy compliance check results showing 50% compliance score with detailed violation breakdown
+
+# Expected Content:
+# {
+  "policies_loaded": 4,
+  "results": [
+    {
+      "policy_name": "require_encryption",
+      "status": "FAILED",
+      "violations": 2,
+      "description": "All storage resources must be encrypted"
+    },
+    {
+      "policy_name": "tag_compliance",
+      "status": "FAILED",
+      "violations": 3,
+      "description": "All resources must have required tags"
+    },
+    {
+      "policy_name": "security_group_rules",
+      "status": "PASSED",
+      "violations": 0,
+      "description": "Security groups must not allow unrestricted access"
+    },
+    {
+      "policy_name": "instance_type_compliance",
+      "status": "PASSED",
+      "violations": 0,
+      "description": "Only approved instance types are allowed"
+    }
+  ],
+  "compliance_score": 50.0
+}

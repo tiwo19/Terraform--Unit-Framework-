@@ -1,0 +1,66 @@
+{
+  "analysis_timestamp": "2025-07-17T10:30:00Z",
+  "terraform_directory": "./terraform_examples",
+  "analysis_type": "combined",
+  "static_analysis": {
+    "tflint_results": {
+      "issues": [
+        {
+          "rule": "terraform_required_version",
+          "severity": "warning",
+          "message": "terraform_required_version is required",
+          "filename": "main.tf",
+          "line": 1
+        }
+      ],
+      "total_issues": 1
+    },
+    "checkov_results": {
+      "passed_checks": 15,
+      "failed_checks": 3,
+      "skipped_checks": 2,
+      "parsing_errors": 0,
+      "results": [
+        {
+          "check_id": "CKV_AWS_23",
+          "check_name": "Ensure Security group does not have an unrestricted inbound rule",
+          "check_result": "FAILED",
+          "file_path": "security_groups.tf",
+          "file_line_range": [10, 15],
+          "resource": "aws_security_group.example",
+          "severity": "HIGH"
+        }
+      ]
+    }
+  },
+  "policy_compliance": {
+    "total_policies": 10,
+    "passed_policies": 7,
+    "failed_policies": 3,
+    "results": [
+      {
+        "policy_name": "require_encryption",
+        "status": "PASSED",
+        "description": "All storage resources must be encrypted"
+      },
+      {
+        "policy_name": "tag_compliance",
+        "status": "FAILED",
+        "description": "All resources must have required tags",
+        "violations": [
+          {
+            "resource": "aws_instance.web",
+            "missing_tags": ["Environment", "Owner"]
+          }
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "total_checks": 30,
+    "passed_checks": 22,
+    "failed_checks": 6,
+    "warnings": 2,
+    "overall_status": "NEEDS_ATTENTION"
+  }
+}

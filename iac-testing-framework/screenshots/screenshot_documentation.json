@@ -1,0 +1,192 @@
+{
+  "title": "IaC Testing Framework - Phase 2 Screenshots Documentation",
+  "description": "This document describes the screenshots to be included in the MSc report",
+  "generated_on": "2025-07-18T07:21:12.185270",
+  "screenshots": {
+    "tflint_run": {
+      "filename": "tflint_run.png",
+      "description": "TFLint Static Analysis Execution",
+      "content": {
+        "command": "tflint --format=json --chdir ./static_analysis/examples",
+        "output": {
+          "issues": [
+            {
+              "rule": "terraform_required_version",
+              "severity": "warning",
+              "message": "terraform_required_version is required",
+              "filename": "main.tf",
+              "line": 1
+            }
+          ],
+          "total_issues": 1
+        }
+      },
+      "msc_caption": "Figure X.X: TFLint execution showing static analysis results with one warning about missing terraform_required_version"
+    },
+    "checkov_scan": {
+      "filename": "checkov_scan.png",
+      "description": "Checkov Security Analysis Execution",
+      "content": {
+        "command": "checkov --directory ./static_analysis/examples --output json",
+        "output": {
+          "passed_checks": 15,
+          "failed_checks": 3,
+          "skipped_checks": 2,
+          "parsing_errors": 0,
+          "results": [
+            {
+              "check_id": "CKV_AWS_23",
+              "check_name": "Ensure Security group does not have an unrestricted inbound rule",
+              "check_result": "FAILED",
+              "file_path": "main.tf",
+              "file_line_range": [
+                10,
+                15
+              ],
+              "resource": "aws_security_group.web",
+              "severity": "HIGH"
+            }
+          ]
+        }
+      },
+      "msc_caption": "Figure X.X: Checkov security scan results showing 3 failed checks including unrestricted security group rule"
+    },
+    "json_output": {
+      "filename": "json_output.png",
+      "description": "Framework JSON Report Output",
+      "content": {
+        "report_structure": {
+          "analysis_timestamp": "2025-07-17T10:30:00Z",
+          "terraform_directory": "./static_analysis/examples",
+          "analysis_type": "combined",
+          "static_analysis": {
+            "status": "success",
+            "terraform_files_found": 1,
+            "summary": {
+              "total_issues": 4,
+              "validation_passed": true,
+              "overall_status": "NEEDS_ATTENTION"
+            }
+          },
+          "policy_compliance": {
+            "status": "success",
+            "total_policies": 4,
+            "passed_policies": 2,
+            "failed_policies": 2,
+            "summary": {
+              "compliance_score": 50.0,
+              "overall_status": "FAILED"
+            }
+          },
+          "summary": {
+            "total_checks": 8,
+            "overall_status": "NEEDS_ATTENTION"
+          }
+        }
+      },
+      "msc_caption": "Figure X.X: Complete framework JSON output showing combined static analysis and policy compliance results"
+    },
+    "cli_execution": {
+      "filename": "cli_execution.png",
+      "description": "Command Line Interface Execution",
+      "content": {
+        "command": "python test_runner.py combined ./static_analysis/examples",
+        "output": {
+          "console_output": [
+            "\ud83d\ude80 Running Combined Analysis...",
+            "\ud83d\udd0d Running Static Analysis...",
+            "\ud83d\udd10 Running Policy Compliance Checks...",
+            "\u2705 Combined results saved to: results.json",
+            "",
+            "============================================================",
+            "\ud83d\udcca ANALYSIS SUMMARY",
+            "============================================================",
+            "\ud83d\udcc1 Directory: ./static_analysis/examples",
+            "\ud83d\udd50 Timestamp: 2025-07-17T10:30:00.123456",
+            "\ud83d\udcc4 Analysis Type: combined",
+            "",
+            "\ud83d\udd0d Static Analysis:",
+            "   - Status: success",
+            "   - Total Issues: 4",
+            "   - Validation: \u2705 PASSED",
+            "",
+            "\ud83d\udd10 Policy Compliance:",
+            "   - Status: success",
+            "   - Total Policies: 4",
+            "   - Passed: 2",
+            "   - Failed: 2",
+            "   - Score: 50.0%",
+            "",
+            "\ud83d\udcc8 Overall Status: NEEDS_ATTENTION"
+          ]
+        }
+      },
+      "msc_caption": "Figure X.X: Command-line execution of the framework showing combined analysis results"
+    },
+    "terraform_validate": {
+      "filename": "terraform_validate.png",
+      "description": "Terraform Validate Execution",
+      "content": {
+        "command": "terraform validate -json",
+        "output": {
+          "format_version": "1.0",
+          "valid": true,
+          "error_count": 0,
+          "warning_count": 0,
+          "diagnostics": []
+        }
+      },
+      "msc_caption": "Figure X.X: Terraform validate command showing successful syntax validation"
+    },
+    "policy_compliance_demo": {
+      "filename": "policy_compliance_demo.png",
+      "description": "Policy Compliance Check Results",
+      "content": {
+        "policies_loaded": 4,
+        "results": [
+          {
+            "policy_name": "require_encryption",
+            "status": "FAILED",
+            "violations": 2,
+            "description": "All storage resources must be encrypted"
+          },
+          {
+            "policy_name": "tag_compliance",
+            "status": "FAILED",
+            "violations": 3,
+            "description": "All resources must have required tags"
+          },
+          {
+            "policy_name": "security_group_rules",
+            "status": "PASSED",
+            "violations": 0,
+            "description": "Security groups must not allow unrestricted access"
+          },
+          {
+            "policy_name": "instance_type_compliance",
+            "status": "PASSED",
+            "violations": 0,
+            "description": "Only approved instance types are allowed"
+          }
+        ],
+        "compliance_score": 50.0
+      },
+      "msc_caption": "Figure X.X: Policy compliance check results showing 50% compliance score with detailed violation breakdown"
+    }
+  },
+  "instructions": {
+    "for_msc_report": [
+      "1. Take actual screenshots of the described commands and outputs",
+      "2. Include clear, readable terminal/console output",
+      "3. Use the provided captions for the MSc report",
+      "4. Ensure screenshots show the framework's capabilities clearly",
+      "5. Include both successful and failed test cases for completeness"
+    ],
+    "technical_requirements": [
+      "Resolution: At least 1920x1080 for clarity",
+      "Format: PNG for text clarity",
+      "Font: Use a clear monospace font in terminal",
+      "Annotations: Add arrows or highlights if needed for clarity"
+    ]
+  }
+}
