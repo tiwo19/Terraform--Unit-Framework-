@@ -26,9 +26,13 @@ class StaticChecker:
             Dictionary containing analysis results
         """
         try:
+            # Determine the correct TFLint command based on the platform
+            import platform
+            tflint_cmd = 'tflint.exe' if platform.system() == 'Windows' else 'tflint'
+            
             # Run TFLint with JSON output
             result = subprocess.run(
-                ['tflint', '--format=json', '--chdir', terraform_dir],
+                [tflint_cmd, '--format=json', '--chdir', terraform_dir],
                 capture_output=True,
                 text=True,
                 timeout=60
@@ -96,23 +100,55 @@ class StaticChecker:
             Dictionary containing security analysis results
         """
         try:
+            # Determine the correct Checkov command based on the platform
+            import platform
+            checkov_cmd = 'checkov.cmd' if platform.system() == 'Windows' else 'checkov'
+            
             # Run Checkov with JSON output
             result = subprocess.run(
-                ['checkov', '--directory', terraform_dir, '--output', 'json', '--quiet'],
+                [checkov_cmd, '--directory', terraform_dir, '--output', 'json'],
                 capture_output=True,
                 text=True,
                 timeout=120
             )
             
-            # Checkov returns non-zero exit code when issues are found
+            # Checkov returns non-zero exit code when issues are found, but that's normal
             if result.stdout:
                 checkov_output = json.loads(result.stdout)
             else:
                 checkov_output = {"results": {"failed_checks": [], "passed_checks": []}}
             
-            # Extract results
-            failed_checks = checkov_output.get("results", {}).get("failed_checks", [])
-            passed_checks = checkov_output.get("results", {}).get("passed_checks", [])
+            # Extract results - handle both single result and multiple results formats
+            if "results" in checkov_output:
+                results_data = checkov_output["results"]
+                if isinstance(results_data, dict):
+                    # Single result format (current case)
+                    failed_checks = results_data.get("failed_checks", [])
+                    passed_checks = results_data.get("passed_checks", [])
+                elif isinstance(results_data, list) and len(results_data) > 0:
+                    # Multiple results format - take the first one (terraform)
+                    terraform_results = results_data[0]
+                    failed_checks = terraform_results.get("failed_checks", [])
+                    passed_checks = terraform_results.get("passed_checks", [])
+                else:
+                    failed_checks = []
+                    passed_checks = []
+            else:
+                failed_checks = []
+                passed_checks = []
+            
+            # Count severity levels
+            severity_counts = {"critical": 0, "high": 0, "medium": 0, "low": 0}
+            for check in failed_checks:
+                severity = check.get("severity")
+                if severity:
+                    severity_lower = severity.lower()
+                    if severity_lower in severity_counts:
+                        severity_counts[severity_lower] += 1
+                    else:
+                        severity_counts["medium"] += 1  # Default to medium if unknown
+                else:
+                    severity_counts["medium"] += 1  # Default to medium if None
             
             # Format results
             formatted_results = {
@@ -125,12 +161,7 @@ class StaticChecker:
                     "failed": failed_checks,
                     "passed": passed_checks
                 },
-                "summary": {
-                    "critical": len([check for check in failed_checks if check.get("severity") == "CRITICAL"]),
-                    "high": len([check for check in failed_checks if check.get("severity") == "HIGH"]),
-                    "medium": len([check for check in failed_checks if check.get("severity") == "MEDIUM"]),
-                    "low": len([check for check in failed_checks if check.get("severity") == "LOW"])
-                }
+                "summary": severity_counts
             }
             
             return formatted_results
@@ -276,10 +307,14 @@ class StaticChecker:
         Returns:
             Overall status string
         """
-        # Check if any tool failed to run
-        if (validate_result.get("status") not in ["success"] or
-            tflint_result.get("status") not in ["success"] or
-            checkov_result.get("status") not in ["success"]):
+        # Check if any critical tool failed to run
+        critical_tool_failures = (
+            validate_result.get("status") not in ["success"] or
+            (tflint_result.get("status") not in ["success", "not_found"]) or
+            (checkov_result.get("status") not in ["success", "not_found"])
+        )
+        
+        if critical_tool_failures:
             return "TOOL_ERROR"
         
         # Check validation status
@@ -289,10 +324,12 @@ class StaticChecker:
         # Count critical issues
         critical_issues = (
             validate_result.get("error_count", 0) +
-            tflint_result.get("total_issues", 0) +
             checkov_result.get("summary", {}).get("critical", 0) +
             checkov_result.get("summary", {}).get("high", 0)
         )
+        
+        # Add TFLint issues (treat all as medium for now)
+        tflint_issues = tflint_result.get("total_issues", 0)
         
         if critical_issues > 0:
             return "CRITICAL_ISSUES"
@@ -301,7 +338,8 @@ class StaticChecker:
         medium_issues = (
             validate_result.get("warning_count", 0) +
             checkov_result.get("summary", {}).get("medium", 0) +
-            checkov_result.get("summary", {}).get("low", 0)
+            checkov_result.get("summary", {}).get("low", 0) +
+            tflint_issues
         )
         
         if medium_issues > 0:
@@ -362,10 +400,17 @@ class StaticChecker:
             },
             "summary": {
                 "total_issues": (
+                    validate_result.get("error_count", 0) +
+                    validate_result.get("warning_count", 0) +
                     tflint_result.get("total_issues", 0) + 
                     checkov_result.get("failed_checks", 0)
                 ),
-                "validation_passed": validate_result.get("status") == "success",
+                "critical_issues": (
+                    validate_result.get("error_count", 0) +
+                    checkov_result.get("summary", {}).get("critical", 0) +
+                    checkov_result.get("summary", {}).get("high", 0)
+                ),
+                "validation_passed": validate_result.get("valid", False),
                 "linting_issues": tflint_result.get("total_issues", 0),
                 "security_issues": checkov_result.get("failed_checks", 0),
                 "overall_status": self._determine_overall_status(

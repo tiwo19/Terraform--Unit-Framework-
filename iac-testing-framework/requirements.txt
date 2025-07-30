@@ -42,3 +42,24 @@ prometheus-client>=0.15.0
 # Security
 bandit>=1.7.0
 safety>=2.0.0
+
+# Phase 3 - Dynamic Testing Dependencies
+boto3>=1.26.0
+localstack>=3.0.0
+docker>=6.0.0
+
+# Phase 4 - CI/CD Integration Dependencies
+jenkins-python>=0.4.0
+github3.py>=3.2.0
+
+# Phase 5 - Evaluation Dependencies
+matplotlib>=3.6.0
+pandas>=1.5.0
+seaborn>=0.12.0
+plotly>=5.0.0
+scipy>=1.9.0
+numpy>=1.24.0
+
+# Additional utilities
+psutil>=5.9.0
+tabulate>=0.9.0

@@ -1,12 +1,12 @@
 {
-  "analysis_timestamp": "2025-07-20T18:01:08.814425",
+  "analysis_timestamp": "2025-07-27T13:15:01.958674",
   "terraform_directory": "c:\\Users\\DAMIPE\\Desktop\\Terraform Msc_Project\\iac-testing-framework\\static_analysis\\examples",
   "analysis_type": "static_and_compliance",
   "static_analysis": {
     "status": "success",
     "terraform_directory": "c:\\Users\\DAMIPE\\Desktop\\Terraform Msc_Project\\iac-testing-framework\\static_analysis\\examples",
     "terraform_files_found": 1,
-    "analysis_timestamp": "2025-07-20T18:01:08.814425",
+    "analysis_timestamp": "2025-07-27T13:15:01.958674",
     "results": {
       "terraform_validate": {
         "tool": "terraform_validate",
