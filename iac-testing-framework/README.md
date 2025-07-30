@@ -14,7 +14,7 @@ Automatically validates Terraform infrastructure code through:
 ### 1. Install Dependencies
 ```bash
 # Clone repository
-git clone https://github.com/your-username/iac-testing-framework.git
+git clone https://github.com/tiwo19/Terraform--Unit-Framework-.git
 cd iac-testing-framework
 
 # Install Python dependencies
