@@ -22,6 +22,13 @@ pip install -r requirements.txt
 
 # Install external tools
 pip install checkov
+
+
+pip install opa-python
+
+
+pip install python-Jenkins
+
 ```
 
 ### 2. Basic Usage
