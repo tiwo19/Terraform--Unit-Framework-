@@ -69,6 +69,9 @@ cd Terraform-Framework-/iac-testing-framework
 # Install Python dependencies
 pip3 install -r requirements.txt
 pip3 install checkov
+# Policy engines
+pip install opa-python
+pip install python-Jenkins
 ```
 
 ### 2. Start LocalStack
