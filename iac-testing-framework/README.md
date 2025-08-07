@@ -39,7 +39,7 @@ python comprehensive_runner.py static ./static_analysis/examples
 # Full validation with LocalStack (recommended)
 docker-compose up -d localstack
 python comprehensive_runner.py comprehensive ./static_analysis/examples \
-  --include-static --include-policy --include-dynamic \
+--include-static --include-policy --include-dynamic \
   --environment localstack
 ```
 

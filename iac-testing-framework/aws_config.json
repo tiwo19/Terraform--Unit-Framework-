@@ -1,0 +1,51 @@
+{
+  "environments": {
+    "localstack": {
+      "description": "Local testing environment using LocalStack",
+      "endpoint_url": "http://localhost:4566",
+      "region": "us-east-1",
+      "access_key_id": "test",
+      "secret_access_key": "test",
+      "requires_docker": true,
+      "safe_for_testing": true
+    },
+    "aws": {
+      "description": "Real AWS environment - requires valid AWS credentials",
+      "region": "us-east-1",
+      "requires_aws_credentials": true,
+      "safe_for_testing": false,
+      "cost_warning": "CAUTION: This will create real AWS resources and may incur costs!"
+    },
+    "aws-dev": {
+      "description": "AWS development environment",
+      "region": "us-west-2",
+      "requires_aws_credentials": true,
+      "safe_for_testing": false,
+      "cost_warning": "CAUTION: This will create real AWS resources and may incur costs!"
+    }
+  },
+  "aws_credentials": {
+    "help": "Configure AWS credentials using one of these methods:",
+    "methods": [
+      "1. AWS CLI: aws configure",
+      "2. Environment variables: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY",
+      "3. IAM roles (for EC2 instances)",
+      "4. AWS credentials file: ~/.aws/credentials"
+    ],
+    "required_permissions": [
+      "ec2:*",
+      "s3:*",
+      "iam:ListRoles",
+      "iam:GetRole",
+      "vpc:*"
+    ]
+  },
+  "localstack_setup": {
+    "help": "To use LocalStack for safe testing:",
+    "steps": [
+      "1. Install Docker: https://docs.docker.com/get-docker/",
+      "2. Start LocalStack: docker-compose up -d localstack",
+      "3. Use environment: --environment localstack"
+    ]
+  }
+}
