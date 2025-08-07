@@ -428,6 +428,30 @@ This project is part of an MSc thesis and is intended for academic and research 
 - **Feature Requests**: Submit enhancement proposals with use cases
 - **Security Issues**: Email security@iac-framework.com for responsible disclosure
 
+## 🤝 Contributing
+
+We welcome contributions from developers of all skill levels! 
+
+### 📚 Getting Started
+- **[Pull Request Guide](PULL_REQUEST_GUIDE.md)** - Step-by-step contribution guide
+- **[Contributing Guidelines](CONTRIBUTING.md)** - Rules and best practices
+- **Issue Templates** - Easy bug reports and feature requests
+
+### 🚀 Quick Contribution
+1. Fork the repository
+2. Create a new branch: `git checkout -b my-feature`
+3. Make your changes and test locally
+4. Submit a pull request
+
+### 💡 Contribution Ideas
+- 🐛 Fix bugs and improve error handling
+- ✨ Add new Terraform examples
+- 🔒 Create new security policies
+- 📚 Improve documentation
+- 🧪 Add test cases
+
+**Ready to contribute?** Check out our [Pull Request Guide](PULL_REQUEST_GUIDE.md)!
+
 ### 📬 Academic Contact
 - **MSc Project**: Part of "Design and Development of a Testing Automation Framework for Infrastructure as Code (IaC) in Scalable Cloud Deployments"
 - **Research Questions**: Contact for academic collaboration
