@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="1" failures="0" time="0">
+    <testsuite name="StaticAnalysis" tests="1" failures="0" time="0">
+        <testcase name="terraform_validation" classname="static_analysis">
+            
+        </testcase>
+    </testsuite>
+    <testsuite name="PolicyCompliance" tests="0" failures="0" time="0">
+
+    </testsuite>
+</testsuites>
