@@ -539,9 +539,9 @@ def main():
         print(f"Tests passed: {test_result['passed_tests']}/{test_result['total_tests']}")
         
         # Cleanup
-        print("\n3. Cleaning up...")
-        cleanup_result = tester.cleanup_deployment(terraform_dir)
-        print(f"Cleanup status: {cleanup_result['status']}")
+        #print("\n3. Cleaning up...")
+       # cleanup_result = tester.cleanup_deployment(terraform_dir)
+       # print(f"Cleanup status: {cleanup_result['status']}")
 
 if __name__ == "__main__":
     main()

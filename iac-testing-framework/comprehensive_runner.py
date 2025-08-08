@@ -98,8 +98,9 @@ class ComprehensiveTestRunner:
         if deployment_result["status"] == "success":
             runtime_results = self.dynamic_tester.run_runtime_tests(terraform_dir)
             
-            # Cleanup infrastructure
-            cleanup_result = self.dynamic_tester.cleanup_deployment(terraform_dir)
+            # Cleanup infrastructure - COMMENTED OUT TO KEEP AWS RESOURCES
+           # cleanup_result = self.dynamic_tester.cleanup_deployment(terraform_dir)
+            cleanup_result = {"status": "skipped", "message": "Cleanup disabled to preserve AWS resources"}
             
             results = {
                 "deployment": deployment_result,
@@ -596,6 +597,107 @@ class ComprehensiveTestRunner:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         detailed_file = f"detailed_dynamic_report_{timestamp}.txt"
         
+        # Get test results for console display
+        runtime_tests = dynamic_results.get('runtime_tests', {})
+        deployment = dynamic_results.get('deployment', {})
+        
+        # Console output with rich details (similar to static analysis)
+        print(f"\n📊 DYNAMIC TESTING BREAKDOWN:")
+        print("=" * 60)
+        
+        # Deployment Summary
+        deployment_status = deployment.get('status', 'unknown')
+        deployment_time = deployment.get('deployment_time', 0)
+        environment = deployment.get('environment', 'unknown')
+        
+        print(f"🏗️  DEPLOYMENT PHASE:")
+        print(f"   Status: {'✅ SUCCESS' if deployment_status == 'success' else '❌ FAILED'}")
+        print(f"   Environment: {environment.upper()}")
+        print(f"   Duration: {deployment_time:.1f} seconds")
+        
+        if deployment_status == 'failed':
+            errors = deployment.get('errors', [])
+            if errors:
+                print(f"   Errors: {len(errors)} deployment issues found")
+                # Show first 2 errors in console
+                for i, error in enumerate(errors[:2], 1):
+                    import re
+                    clean_error = re.sub(r'\x1b\[[0-9;]*m', '', error)
+                    # Get first line of error for console
+                    error_line = clean_error.split('\n')[0][:80] + "..."
+                    print(f"      Error {i}: {error_line}")
+                if len(errors) > 2:
+                    print(f"      ... and {len(errors) - 2} more errors")
+        
+        # Runtime Tests Summary
+        if runtime_tests.get('status') != 'skipped':
+            print(f"\n🧪 RUNTIME TESTING PHASE:")
+            
+            test_results = runtime_tests.get('test_results', {})
+            if isinstance(test_results, dict):
+                passed_tests = []
+                failed_tests = []
+                
+                for test_name, test_result in test_results.items():
+                    if isinstance(test_result, dict):
+                        if test_result.get('status') == 'passed':
+                            passed_tests.append((test_name, test_result))
+                        else:
+                            failed_tests.append((test_name, test_result))
+                
+                # Show passed tests summary
+                if passed_tests:
+                    print(f"   ✅ PASSED TESTS ({len(passed_tests)}):")
+                    for i, (test_name, test_result) in enumerate(passed_tests[:3], 1):
+                        duration = test_result.get('duration', 'unknown')
+                        print(f"      {test_name} ({duration})")
+                    if len(passed_tests) > 3:
+                        print(f"      ... and {len(passed_tests) - 3} more passed tests")
+                
+                # Show failed tests summary  
+                if failed_tests:
+                    print(f"   ❌ FAILED TESTS ({len(failed_tests)}):")
+                    for i, (test_name, test_result) in enumerate(failed_tests[:3], 1):
+                        error = test_result.get('error', 'No error details')
+                        error_summary = error.split('\n')[0][:60] + "..."
+                        print(f"      {test_name}: {error_summary}")
+                    if len(failed_tests) > 3:
+                        print(f"      ... and {len(failed_tests) - 3} more failed tests")
+            
+            # Overall test statistics
+            total_tests = runtime_tests.get('total_tests', 0)
+            passed_count = runtime_tests.get('passed_tests', 0)
+            failed_count = runtime_tests.get('failed_tests', 0)
+            
+            if total_tests > 0:
+                success_rate = (passed_count / total_tests) * 100
+                print(f"\n   📈 TEST STATISTICS:")
+                print(f"      Total Tests: {total_tests}")
+                print(f"      Passed: {passed_count}")
+                print(f"      Failed: {failed_count}")
+                print(f"      Success Rate: {success_rate:.1f}%")
+        
+        # Infrastructure Summary
+        resources_deployed = deployment.get('resources_deployed', [])
+        if resources_deployed:
+            print(f"\n🏗️  INFRASTRUCTURE DEPLOYED:")
+            for i, resource in enumerate(resources_deployed[:5], 1):
+                print(f"      {i}. {resource}")
+            if len(resources_deployed) > 5:
+                print(f"      ... and {len(resources_deployed) - 5} more resources")
+        
+        # Cleanup Status
+        cleanup = dynamic_results.get('cleanup', {})
+        cleanup_status = cleanup.get('status', 'unknown')
+        print(f"\n🧹 CLEANUP PHASE:")
+        if cleanup_status == 'skipped':
+            print(f"   Status: ⏸️  SKIPPED (Resources preserved for demonstration)")
+        elif cleanup_status == 'success':
+            print(f"   Status: ✅ COMPLETED (All resources cleaned up)")
+        else:
+            print(f"   Status: ❌ FAILED (Manual cleanup may be required)")
+        
+        # File output with complete details
         with open(detailed_file, 'w', encoding='utf-8') as f:
             f.write("=" * 80 + "\n")
             f.write("🚀 DETAILED DYNAMIC TESTING REPORT\n")
@@ -605,7 +707,6 @@ class ComprehensiveTestRunner:
             f.write("=" * 80 + "\n\n")
             
             # Deployment details
-            deployment = dynamic_results.get('deployment', {})
             f.write("🏗️ DEPLOYMENT DETAILS:\n")
             f.write("=" * 40 + "\n")
             f.write(f"Status: {deployment.get('status', 'unknown')}\n")
@@ -613,10 +714,22 @@ class ComprehensiveTestRunner:
             f.write(f"Start Time: {deployment.get('deployment_timestamp', 'unknown')}\n")
             f.write(f"Duration: {deployment.get('deployment_time', 0)} seconds\n")
             
+            # Add Terraform output details
+            terraform_output = deployment.get('terraform_output', '')
+            if terraform_output:
+                f.write(f"\nTerraform Output:\n{terraform_output}\n")
+            
+            # Add deployed resources
+            if resources_deployed:
+                f.write(f"\nDeployed Resources ({len(resources_deployed)}):\n")
+                for i, resource in enumerate(resources_deployed, 1):
+                    f.write(f"{i:2d}. {resource}\n")
+            
             if deployment.get('status') == 'failed':
                 errors = deployment.get('errors', [])
                 if errors:
-                    f.write(f"\nError Details ({len(errors)} errors):\n")
+                    f.write(f"\nDEPLOYMENT ERRORS ({len(errors)} errors):\n")
+                    f.write("=" * 40 + "\n")
                     for i, error in enumerate(errors, 1):
                         # Clean ANSI codes for file output
                         import re
@@ -627,38 +740,68 @@ class ComprehensiveTestRunner:
                     f.write(f"\nError Details:\nNo specific error details available\n")
             
             # Runtime tests details
-            runtime_tests = dynamic_results.get('runtime_tests', {})
             if runtime_tests.get('status') != 'skipped':
-                f.write(f"\n🧪 RUNTIME TESTS:\n")
+                f.write(f"\n🧪 RUNTIME TESTS DETAILED RESULTS:\n")
                 f.write("=" * 40 + "\n")
-                f.write(f"Status: {runtime_tests.get('status', 'unknown')}\n")
+                f.write(f"Overall Status: {runtime_tests.get('status', 'unknown')}\n")
+                f.write(f"Total Tests: {runtime_tests.get('total_tests', 0)}\n")
+                f.write(f"Passed: {runtime_tests.get('passed_tests', 0)}\n")
+                f.write(f"Failed: {runtime_tests.get('failed_tests', 0)}\n")
+                
+                if total_tests > 0:
+                    success_rate = (runtime_tests.get('passed_tests', 0) / total_tests) * 100
+                    f.write(f"Success Rate: {success_rate:.1f}%\n")
+                
+                f.write(f"\nINDIVIDUAL TEST RESULTS:\n")
+                f.write("-" * 40 + "\n")
                 
                 if 'test_results' in runtime_tests:
                     test_results = runtime_tests['test_results']
                     if isinstance(test_results, list):
                         for i, test_result in enumerate(test_results, 1):
                             test_name = test_result.get('test_name', f'Test {i}')
-                            f.write(f"\nTest: {test_name}\n")
-                            f.write(f"  Status: {test_result.get('status', 'unknown')}\n")
-                            f.write(f"  Duration: {test_result.get('duration', 'unknown')}\n")
+                            f.write(f"\n{i:2d}. Test: {test_name}\n")
+                            f.write(f"    Status: {test_result.get('status', 'unknown')}\n")
+                            f.write(f"    Duration: {test_result.get('duration', 'unknown')}\n")
                             if 'error' in test_result:
-                                f.write(f"  Error: {test_result['error']}\n")
+                                f.write(f"    Error: {test_result['error']}\n")
+                            if 'details' in test_result:
+                                f.write(f"    Details: {test_result['details']}\n")
                     else:
                         # Handle as dictionary (legacy support)
-                        for test_name, test_result in test_results.items():
-                            f.write(f"\nTest: {test_name}\n")
-                            f.write(f"  Status: {test_result.get('status', 'unknown')}\n")
-                            f.write(f"  Duration: {test_result.get('duration', 'unknown')}\n")
-                            if 'error' in test_result:
-                                f.write(f"  Error: {test_result['error']}\n")
+                        for i, (test_name, test_result) in enumerate(test_results.items(), 1):
+                            f.write(f"\n{i:2d}. Test: {test_name}\n")
+                            if isinstance(test_result, dict):
+                                f.write(f"    Status: {test_result.get('status', 'unknown')}\n")
+                                f.write(f"    Duration: {test_result.get('duration', 'unknown')}\n")
+                                if 'error' in test_result:
+                                    f.write(f"    Error: {test_result['error']}\n")
+                                if 'details' in test_result:
+                                    f.write(f"    Details: {test_result['details']}\n")
+                            else:
+                                f.write(f"    Result: {test_result}\n")
             
             # Cleanup details
-            cleanup = dynamic_results.get('cleanup', {})
-            f.write(f"\n🧹 CLEANUP:\n")
+            f.write(f"\n🧹 CLEANUP DETAILS:\n")
             f.write("=" * 40 + "\n")
             f.write(f"Status: {cleanup.get('status', 'unknown')}\n")
             if 'message' in cleanup:
                 f.write(f"Message: {cleanup['message']}\n")
+            if 'cleanup_time' in cleanup:
+                f.write(f"Duration: {cleanup['cleanup_time']} seconds\n")
+            
+            # Add AWS resource summary if available
+            aws_resources = runtime_tests.get('aws_resources_found', {})
+            if aws_resources:
+                f.write(f"\n☁️  AWS RESOURCES DISCOVERED:\n")
+                f.write("=" * 40 + "\n")
+                for resource_type, resources in aws_resources.items():
+                    f.write(f"\n{resource_type.upper()}:\n")
+                    if isinstance(resources, list):
+                        for resource in resources:
+                            f.write(f"  - {resource}\n")
+                    else:
+                        f.write(f"  - {resources}\n")
         
         print(f"\n   📄 Full detailed dynamic report saved to: {detailed_file}")
 

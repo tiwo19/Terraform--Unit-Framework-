@@ -210,7 +210,7 @@ class CICDIntegration:
         # Save summary as markdown
         markdown_path = os.path.join(output_dir, "summary.md")
         summary = self.create_summary_comment(results)
-        with open(markdown_path, 'w') as f:
+        with open(markdown_path, 'w', encoding='utf-8') as f:
             f.write(summary)
         
         print(f"Reports saved to {output_dir}/")
