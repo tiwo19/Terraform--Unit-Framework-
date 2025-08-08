@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Comprehensive Test Runner for IaC Testing Framework
-Integrates all phases: Static Analysis, Policy Compliance, Dynamic Testing, CI/CD, and Evaluation
+Integrates Static Analysis, Policy Compliance, and Dynamic Testing (LocalStack & AWS)
 """
 
 import argparse
@@ -17,8 +17,6 @@ sys.path.insert(0, str(Path(__file__).parent))
 from static_analysis.static_checker import StaticChecker
 from policy_compliance.compliance_checker import ComplianceChecker
 from dynamic_provisioning.dynamic_tester import DynamicTester
-from ci_cd.ci_integration import CICDIntegration
-from evaluation.evaluator import FrameworkEvaluator
 
 class ComprehensiveTestRunner:
     """
@@ -30,8 +28,6 @@ class ComprehensiveTestRunner:
         self.static_checker = StaticChecker()
         self.compliance_checker = None
         self.dynamic_tester = DynamicTester()
-        self.ci_integration = CICDIntegration()
-        self.evaluator = FrameworkEvaluator()
         
     def run_static_analysis(self, terraform_dir: str, output_file: str = None) -> dict:
         """Run static analysis on Terraform files"""
@@ -175,36 +171,6 @@ class ComprehensiveTestRunner:
             print(f"✅ Comprehensive results saved to: {output_file}")
         
         return combined_results
-    
-    def run_evaluation(self, output_dir: str = "evaluation_results") -> dict:
-        """Run framework evaluation and generate reports"""
-        print("📊 Running Framework Evaluation...")
-        
-        evaluation_results = self.evaluator.generate_evaluation_report()
-        
-        print(f"✅ Evaluation completed. Results in: {output_dir}")
-        return evaluation_results
-    
-    def run_ci_integration(self, results: dict, ci_environment: str = "github_actions") -> None:
-        """Process results for CI/CD integration"""
-        print(f"🔗 Processing results for {ci_environment}...")
-        
-        # Initialize CI integration
-        ci_integration = CICDIntegration(ci_environment=ci_environment)
-        
-        # Generate CI-friendly reports
-        ci_integration.save_results_for_reporting(results)
-        
-        # Set CI outputs
-        overall_status = results.get("summary", {}).get("overall_status", "UNKNOWN")
-        ci_integration.set_output("test_status", overall_status.lower())
-        
-        if "policy_compliance" in results:
-            compliance_score = results["policy_compliance"].get("summary", {}).get("compliance_score", 0)
-            ci_integration.set_output("compliance_score", str(int(compliance_score)))
-        
-        # Check for breaking changes and set exit code
-        ci_integration.set_exit_code_based_on_results(results)
     
     def _calculate_overall_summary(self, static_results: dict, compliance_results: dict, dynamic_results: dict = None) -> dict:
         """Calculate overall summary across all analysis types"""
@@ -839,16 +805,6 @@ def main():
     comprehensive_parser.add_argument('--environment', '-e', choices=['localstack', 'aws'],
                                     default='localstack', help='Test environment for dynamic testing')
     comprehensive_parser.add_argument('--output', '-o', help='Output file for results')
-    comprehensive_parser.add_argument('--ci', choices=['github_actions', 'jenkins', 'gitlab_ci'],
-                                    help='Process results for CI/CD integration')
-    
-    # Evaluation command
-    eval_parser = subparsers.add_parser('evaluate', help='Run framework evaluation')
-    eval_parser.add_argument('--output-dir', default='evaluation_results',
-                           help='Directory for evaluation results')
-    
-    # Demo command
-    demo_parser = subparsers.add_parser('demo', help='Run demonstration')
     
     args = parser.parse_args()
     
@@ -878,18 +834,6 @@ def main():
                 args.environment, args.output
             )
             runner.print_summary(results)
-            
-            # CI/CD integration if requested
-            if args.ci:
-                runner.run_ci_integration(results, args.ci)
-            
-        elif args.command == 'evaluate':
-            runner.run_evaluation(args.output_dir)
-            
-        elif args.command == 'demo':
-            # Import and run demo
-            from demo_phase2 import main as demo_main
-            demo_main()
             
     except KeyboardInterrupt:
         print("\n⚠️ Operation cancelled by user")

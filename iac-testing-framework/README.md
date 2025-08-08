@@ -14,7 +14,7 @@ Automatically validates Terraform infrastructure code through:
 ### 1. Install Dependencies
 ```bash
 # Clone repository
-git clone https://github.com/your-username/iac-testing-framework.git
+git clone https://github.com/tiwo19/Terraform--Unit-Framework-.git
 cd iac-testing-framework
 
 # Install Python dependencies
@@ -22,6 +22,13 @@ pip install -r requirements.txt
 
 # Install external tools
 pip install checkov
+
+
+pip install opa-python
+
+
+pip install python-Jenkins
+
 ```
 
 ### 2. Basic Usage
@@ -32,7 +39,7 @@ python comprehensive_runner.py static ./static_analysis/examples
 # Full validation with LocalStack (recommended)
 docker-compose up -d localstack
 python comprehensive_runner.py comprehensive ./static_analysis/examples \
-  --include-static --include-policy --include-dynamic \
+--include-static --include-policy --include-dynamic \
   --environment localstack
 ```
 
@@ -62,6 +69,9 @@ cd Terraform-Framework-/iac-testing-framework
 # Install Python dependencies
 pip3 install -r requirements.txt
 pip3 install checkov
+# Policy engines
+pip install opa-python
+pip install python-Jenkins
 ```
 
 ### 2. Start LocalStack
@@ -422,6 +432,30 @@ This project is part of an MSc thesis and is intended for academic and research 
 - **Bug Reports**: Use GitHub Issues with detailed reproduction steps
 - **Feature Requests**: Submit enhancement proposals with use cases
 - **Security Issues**: Email security@iac-framework.com for responsible disclosure
+
+## 🤝 Contributing
+
+We welcome contributions from developers of all skill levels! 
+
+### 📚 Getting Started
+- **[Pull Request Guide](PULL_REQUEST_GUIDE.md)** - Step-by-step contribution guide
+- **[Contributing Guidelines](CONTRIBUTING.md)** - Rules and best practices
+- **Issue Templates** - Easy bug reports and feature requests
+
+### 🚀 Quick Contribution
+1. Fork the repository
+2. Create a new branch: `git checkout -b my-feature`
+3. Make your changes and test locally
+4. Submit a pull request
+
+### 💡 Contribution Ideas
+- 🐛 Fix bugs and improve error handling
+- ✨ Add new Terraform examples
+- 🔒 Create new security policies
+- 📚 Improve documentation
+- 🧪 Add test cases
+
+**Ready to contribute?** Check out our [Pull Request Guide](PULL_REQUEST_GUIDE.md)!
 
 ### 📬 Academic Contact
 - **MSc Project**: Part of "Design and Development of a Testing Automation Framework for Infrastructure as Code (IaC) in Scalable Cloud Deployments"
