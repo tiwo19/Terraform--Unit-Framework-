@@ -132,7 +132,8 @@ python comprehensive_runner.py comprehensive ./static_analysis/examples \
   --environment localstack \
   --html-report example-report.html
 
-  AWS test
+
+## 🎯 Main  AWS Commands
 
   python comprehensive_runner.py comprehensive ./static_analysis/examples/sample --environment aws --include-dynamic
   
