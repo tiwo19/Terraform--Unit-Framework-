@@ -1,0 +1,344 @@
+================================================================================
+🔐 DETAILED POLICY COMPLIANCE REPORT
+================================================================================
+📁 Directory: ./static_analysis/examples
+🕐 Generated: 2025-08-15 20:54:24
+================================================================================
+
+❌ FAILED POLICIES (14):
+==================================================
+ 1. require_s3_encryption
+    Description: All S3 buckets must have encryption enabled
+    Applicable Resources: 15
+    Violations: 30
+    Violation Details:
+      1. Resource: aws_s3_bucket.web_assets
+         Rule: Property server_side_encryption_configuration is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_s3_bucket.web_assets
+         Rule: Property encryption is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_s3_bucket.financial_records
+         Rule: Property server_side_encryption_configuration is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_s3_bucket.financial_records
+         Rule: Property encryption is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_s3_bucket.patient_data
+         Rule: Property server_side_encryption_configuration is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 25 more violations
+
+ 2. secure_s3_public_access
+    Description: S3 buckets must block public access for security
+    Applicable Resources: 3
+    Violations: 12
+    Violation Details:
+      1. Resource: aws_s3_bucket_public_access_block.web_assets
+         Rule: Property block_public_acls is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_s3_bucket_public_access_block.web_assets
+         Rule: Property block_public_policy is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_s3_bucket_public_access_block.web_assets
+         Rule: Property ignore_public_acls is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_s3_bucket_public_access_block.web_assets
+         Rule: Property restrict_public_buckets is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_s3_bucket_public_access_block.public_website
+         Rule: Property block_public_acls is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 7 more violations
+
+ 3. ec2_security_requirements
+    Description: EC2 instances must meet security standards
+    Applicable Resources: 12
+    Violations: 24
+    Violation Details:
+      1. Resource: aws_instance.web_server
+         Rule: Property monitoring is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_instance.web_server
+         Rule: Property root_block_device.encrypted is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_instance.production_web
+         Rule: Property monitoring is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_instance.production_web
+         Rule: Property root_block_device.encrypted is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_instance.audit_server
+         Rule: Property monitoring is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 19 more violations
+
+ 4. financial_data_compliance
+    Description: Financial data must meet SOX compliance requirements
+    Applicable Resources: 15
+    Violations: 15
+    Violation Details:
+      1. Resource: aws_s3_bucket.web_assets
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_s3_bucket.financial_records
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_s3_bucket.patient_data
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_s3_bucket.customer_data
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_s3_bucket.example
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 10 more violations
+
+ 5. healthcare_data_compliance
+    Description: Healthcare data must meet HIPAA compliance requirements
+    Applicable Resources: 15
+    Violations: 15
+    Violation Details:
+      1. Resource: aws_s3_bucket.web_assets
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_s3_bucket.financial_records
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_s3_bucket.patient_data
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_s3_bucket.customer_data
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_s3_bucket.example
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 10 more violations
+
+ 6. production_governance
+    Description: Production resources must have governance controls
+    Applicable Resources: 12
+    Violations: 12
+    Violation Details:
+      1. Resource: aws_instance.web_server
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_instance.production_web
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_instance.audit_server
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_instance.web
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_instance.web_server_1
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 7 more violations
+
+ 7. audit_and_logging
+    Description: Audit systems must have enhanced logging
+    Applicable Resources: 12
+    Violations: 12
+    Violation Details:
+      1. Resource: aws_instance.web_server
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_instance.production_web
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_instance.audit_server
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_instance.web
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_instance.web_server_1
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 7 more violations
+
+ 8. gdpr_compliance
+    Description: Customer data must meet GDPR requirements
+    Applicable Resources: 15
+    Violations: 15
+    Violation Details:
+      1. Resource: aws_s3_bucket.web_assets
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_s3_bucket.financial_records
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_s3_bucket.patient_data
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_s3_bucket.customer_data
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_s3_bucket.example
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 10 more violations
+
+ 9. mandatory_tags
+    Description: All resources must have mandatory organizational tags
+    Applicable Resources: 35
+    Violations: 35
+    Violation Details:
+      1. Resource: aws_s3_bucket.web_assets
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_security_group.web_sg
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_instance.web_server
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_s3_bucket.financial_records
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_s3_bucket.patient_data
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 30 more violations
+
+10. network_segmentation
+    Description: Network resources must follow segmentation policies
+    Applicable Resources: 8
+    Violations: 8
+    Violation Details:
+      1. Resource: aws_security_group.web_sg
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_security_group.compliance_sg
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_security_group.web
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_security_group.web_dmz
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_security_group.database_sg
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 3 more violations
+
+11. storage_encryption
+    Description: All storage must be encrypted
+    Applicable Resources: 27
+    Violations: 54
+    Violation Details:
+      1. Resource: aws_s3_bucket.web_assets
+         Rule: Property encryption is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_s3_bucket.web_assets
+         Rule: Property encrypted is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_instance.web_server
+         Rule: Property encryption is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_instance.web_server
+         Rule: Property encrypted is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_s3_bucket.financial_records
+         Rule: Property encryption is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 49 more violations
+
+12. ebs_encryption
+    Description: All EBS volumes must be encrypted
+    Applicable Resources: 12
+    Violations: 24
+    Violation Details:
+      1. Resource: aws_instance.web_server
+         Rule: Property root_block_device is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_instance.web_server
+         Rule: Property root_block_device.encrypted is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_instance.production_web
+         Rule: Property root_block_device is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_instance.production_web
+         Rule: Property root_block_device.encrypted is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_instance.audit_server
+         Rule: Property root_block_device is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 19 more violations
+
+13. require_encryption
+    Description: All storage resources must be encrypted
+    Applicable Resources: 15
+    Violations: 30
+    Violation Details:
+      1. Resource: aws_s3_bucket.web_assets
+         Rule: Property encryption is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_s3_bucket.web_assets
+         Rule: Property encrypted is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_s3_bucket.financial_records
+         Rule: Property encryption is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_s3_bucket.financial_records
+         Rule: Property encrypted is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_s3_bucket.patient_data
+         Rule: Property encryption is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 25 more violations
+
+14. tag_compliance
+    Description: All resources must have required tags
+    Applicable Resources: 35
+    Violations: 35
+    Violation Details:
+      1. Resource: aws_s3_bucket.web_assets
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      2. Resource: aws_security_group.web_sg
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      3. Resource: aws_instance.web_server
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      4. Resource: aws_s3_bucket.financial_records
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      5. Resource: aws_s3_bucket.patient_data
+         Rule: Property tags is required but not validated in simple parsing
+         Severity: MEDIUM
+      ... and 30 more violations
+
+
+✅ PASSED POLICIES (6):
+==================================================
+ 1. secure_security_groups
+    Description: Security groups must not allow unrestricted dangerous access
+    Applicable Resources: 8
+
+ 2. ssh_access_control
+    Description: SSH access must be restricted and documented
+    Applicable Resources: 8
+
+ 3. database_access_control
+    Description: Database ports must not be publicly accessible
+    Applicable Resources: 8
+
+ 4. instance_type_policy
+    Description: Only approved instance types allowed
+    Applicable Resources: 12
+
+ 5. security_group_rules
+    Description: Security groups must not allow unrestricted access
+    Applicable Resources: 8
+
+ 6. instance_type_compliance
+    Description: Only approved instance types are allowed
+    Applicable Resources: 12
+
