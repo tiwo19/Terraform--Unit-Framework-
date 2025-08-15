@@ -1,0 +1,64 @@
+# Requirements for IaC Testing Framework Phase 2
+
+# Core dependencies
+click>=8.0.0
+pyyaml>=6.0
+jinja2>=3.0.0
+requests>=2.28.0
+
+# Static analysis tools
+checkov>=2.3.0
+
+# Policy engines
+
+
+# Testing frameworks
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Documentation
+sphinx>=5.0.0
+sphinx-rtd-theme>=1.0.0
+
+# CLI enhancements
+rich>=13.0.0
+typer>=0.9.0
+
+# Development tools
+black>=22.0.0
+flake8>=5.0.0
+mypy>=1.0.0
+pre-commit>=2.20.0
+
+# JSON/YAML processing
+jsonschema>=4.0.0
+ruamel.yaml>=0.17.0
+
+# Logging and monitoring
+structlog>=22.0.0
+prometheus-client>=0.15.0
+
+# Security
+bandit>=1.7.0
+safety>=2.0.0
+
+# Phase 3 - Dynamic Testing Dependencies
+boto3>=1.26.0
+localstack>=3.0.0
+docker>=6.0.0
+
+# Phase 4 - CI/CD Integration Dependencies
+
+github3.py>=3.2.0
+
+# Phase 5 - Evaluation Dependencies
+matplotlib>=3.6.0
+pandas>=1.5.0
+seaborn>=0.12.0
+plotly>=5.0.0
+scipy>=1.9.0
+numpy>=1.24.0
+
+# Additional utilities
+psutil>=5.9.0
+tabulate>=0.9.0
