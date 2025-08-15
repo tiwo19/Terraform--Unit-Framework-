@@ -1,0 +1,381 @@
+================================================================================
+🔍 DETAILED SECURITY ANALYSIS REPORT
+================================================================================
+📁 Directory: ./static_analysis/examples
+🕐 Generated: 2025-08-15 17:43:56
+================================================================================
+
+❌ FAILED CHECKS (49):
+==================================================
+ 1. CKV_AWS_53: Ensure S3 bucket has block public ACLS enabled
+    Resource: aws_s3_bucket_public_access_block.web_assets
+    File: \broken_web_app.tf
+    Description: None
+
+ 2. CKV_AWS_54: Ensure S3 bucket has block public policy enabled
+    Resource: aws_s3_bucket_public_access_block.web_assets
+    File: \broken_web_app.tf
+    Description: None
+
+ 3. CKV_AWS_55: Ensure S3 bucket has ignore public ACLs enabled
+    Resource: aws_s3_bucket_public_access_block.web_assets
+    File: \broken_web_app.tf
+    Description: None
+
+ 4. CKV_AWS_56: Ensure S3 bucket has 'restrict_public_buckets' enabled
+    Resource: aws_s3_bucket_public_access_block.web_assets
+    File: \broken_web_app.tf
+    Description: None
+
+ 5. CKV_AWS_23: Ensure every security group and rule has a description
+    Resource: aws_security_group.web_sg
+    File: \broken_web_app.tf
+    Description: None
+
+ 6. CKV_AWS_382: Ensure no security groups allow egress from 0.0.0.0:0 to port -1
+    Resource: aws_security_group.web_sg
+    File: \broken_web_app.tf
+    Description: None
+
+ 7. CKV_AWS_24: Ensure no security groups allow ingress from 0.0.0.0:0 to port 22
+    Resource: aws_security_group.web_sg
+    File: \broken_web_app.tf
+    Description: None
+
+ 8. CKV_AWS_260: Ensure no security groups allow ingress from 0.0.0.0:0 to port 80
+    Resource: aws_security_group.web_sg
+    File: \broken_web_app.tf
+    Description: None
+
+ 9. CKV_AWS_126: Ensure that detailed monitoring is enabled for EC2 instances
+    Resource: aws_instance.web_server
+    File: \broken_web_app.tf
+    Description: None
+
+10. CKV_AWS_135: Ensure that EC2 is EBS optimized
+    Resource: aws_instance.web_server
+    File: \broken_web_app.tf
+    Description: None
+
+11. CKV_AWS_79: Ensure Instance Metadata Service Version 1 is not enabled
+    Resource: aws_instance.web_server
+    File: \broken_web_app.tf
+    Description: None
+
+12. CKV_AWS_8: Ensure all data stored in the Launch configuration or instance Elastic Blocks Store is securely encrypted
+    Resource: aws_instance.web_server
+    File: \broken_web_app.tf
+    Description: None
+
+13. CKV_AWS_23: Ensure every security group and rule has a description
+    Resource: aws_security_group.web
+    File: \main.tf
+    Description: None
+
+14. CKV_AWS_382: Ensure no security groups allow egress from 0.0.0.0:0 to port -1
+    Resource: aws_security_group.web
+    File: \main.tf
+    Description: None
+
+15. CKV_AWS_260: Ensure no security groups allow ingress from 0.0.0.0:0 to port 80
+    Resource: aws_security_group.web
+    File: \main.tf
+    Description: None
+
+16. CKV_AWS_126: Ensure that detailed monitoring is enabled for EC2 instances
+    Resource: aws_instance.web
+    File: \main.tf
+    Description: None
+
+17. CKV_AWS_135: Ensure that EC2 is EBS optimized
+    Resource: aws_instance.web
+    File: \main.tf
+    Description: None
+
+18. CKV_AWS_79: Ensure Instance Metadata Service Version 1 is not enabled
+    Resource: aws_instance.web
+    File: \main.tf
+    Description: None
+
+19. CKV_AWS_8: Ensure all data stored in the Launch configuration or instance Elastic Blocks Store is securely encrypted
+    Resource: aws_instance.web
+    File: \main.tf
+    Description: None
+
+20. CKV2_AWS_41: Ensure an IAM role is attached to EC2 instance
+    Resource: aws_instance.web_server
+    File: \broken_web_app.tf
+    Description: None
+
+21. CKV2_AWS_41: Ensure an IAM role is attached to EC2 instance
+    Resource: aws_instance.web
+    File: \main.tf
+    Description: None
+
+22. CKV2_AWS_62: Ensure S3 buckets should have event notifications enabled
+    Resource: aws_s3_bucket.web_assets
+    File: \broken_web_app.tf
+    Description: None
+
+23. CKV2_AWS_62: Ensure S3 buckets should have event notifications enabled
+    Resource: aws_s3_bucket.example
+    File: \main.tf
+    Description: None
+
+24. CKV2_AWS_62: Ensure S3 buckets should have event notifications enabled
+    Resource: aws_s3_bucket.framke_results
+    File: \main2.tf
+    Description: None
+
+25. CKV2_AWS_62: Ensure S3 buckets should have event notifications enabled
+    Resource: aws_s3_bucket.test
+    File: \sample.tf
+    Description: None
+
+26. CKV2_AWS_6: Ensure that S3 bucket has a Public Access block
+    Resource: aws_s3_bucket.web_assets
+    File: \broken_web_app.tf
+    Description: None
+
+27. CKV2_AWS_6: Ensure that S3 bucket has a Public Access block
+    Resource: aws_s3_bucket.example
+    File: \main.tf
+    Description: None
+
+28. CKV2_AWS_6: Ensure that S3 bucket has a Public Access block
+    Resource: aws_s3_bucket.framke_results
+    File: \main2.tf
+    Description: None
+
+29. CKV2_AWS_6: Ensure that S3 bucket has a Public Access block
+    Resource: aws_s3_bucket.test
+    File: \sample.tf
+    Description: None
+
+30. CKV_AWS_21: Ensure all data stored in the S3 bucket have versioning enabled
+    Resource: aws_s3_bucket.web_assets
+    File: \broken_web_app.tf
+    Description: None
+
+31. CKV_AWS_21: Ensure all data stored in the S3 bucket have versioning enabled
+    Resource: aws_s3_bucket.example
+    File: \main.tf
+    Description: None
+
+32. CKV_AWS_21: Ensure all data stored in the S3 bucket have versioning enabled
+    Resource: aws_s3_bucket.framke_results
+    File: \main2.tf
+    Description: None
+
+33. CKV_AWS_21: Ensure all data stored in the S3 bucket have versioning enabled
+    Resource: aws_s3_bucket.test
+    File: \sample.tf
+    Description: None
+
+34. CKV_AWS_18: Ensure the S3 bucket has access logging enabled
+    Resource: aws_s3_bucket.web_assets
+    File: \broken_web_app.tf
+    Description: None
+
+35. CKV_AWS_18: Ensure the S3 bucket has access logging enabled
+    Resource: aws_s3_bucket.example
+    File: \main.tf
+    Description: None
+
+36. CKV_AWS_18: Ensure the S3 bucket has access logging enabled
+    Resource: aws_s3_bucket.framke_results
+    File: \main2.tf
+    Description: None
+
+37. CKV_AWS_18: Ensure the S3 bucket has access logging enabled
+    Resource: aws_s3_bucket.test
+    File: \sample.tf
+    Description: None
+
+38. CKV2_AWS_61: Ensure that an S3 bucket has a lifecycle configuration
+    Resource: aws_s3_bucket.web_assets
+    File: \broken_web_app.tf
+    Description: None
+
+39. CKV2_AWS_61: Ensure that an S3 bucket has a lifecycle configuration
+    Resource: aws_s3_bucket.example
+    File: \main.tf
+    Description: None
+
+40. CKV2_AWS_61: Ensure that an S3 bucket has a lifecycle configuration
+    Resource: aws_s3_bucket.framke_results
+    File: \main2.tf
+    Description: None
+
+41. CKV2_AWS_61: Ensure that an S3 bucket has a lifecycle configuration
+    Resource: aws_s3_bucket.test
+    File: \sample.tf
+    Description: None
+
+42. CKV_AWS_144: Ensure that S3 bucket has cross-region replication enabled
+    Resource: aws_s3_bucket.web_assets
+    File: \broken_web_app.tf
+    Description: None
+
+43. CKV_AWS_144: Ensure that S3 bucket has cross-region replication enabled
+    Resource: aws_s3_bucket.example
+    File: \main.tf
+    Description: None
+
+44. CKV_AWS_144: Ensure that S3 bucket has cross-region replication enabled
+    Resource: aws_s3_bucket.framke_results
+    File: \main2.tf
+    Description: None
+
+45. CKV_AWS_144: Ensure that S3 bucket has cross-region replication enabled
+    Resource: aws_s3_bucket.test
+    File: \sample.tf
+    Description: None
+
+46. CKV_AWS_145: Ensure that S3 buckets are encrypted with KMS by default
+    Resource: aws_s3_bucket.web_assets
+    File: \broken_web_app.tf
+    Description: None
+
+47. CKV_AWS_145: Ensure that S3 buckets are encrypted with KMS by default
+    Resource: aws_s3_bucket.example
+    File: \main.tf
+    Description: None
+
+48. CKV_AWS_145: Ensure that S3 buckets are encrypted with KMS by default
+    Resource: aws_s3_bucket.framke_results
+    File: \main2.tf
+    Description: None
+
+49. CKV_AWS_145: Ensure that S3 buckets are encrypted with KMS by default
+    Resource: aws_s3_bucket.test
+    File: \sample.tf
+    Description: None
+
+
+✅ PASSED CHECKS (31):
+==================================================
+ 1. CKV_AWS_93: Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)
+    Resource: aws_s3_bucket.web_assets
+    Description: None
+
+ 2. CKV_AWS_25: Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389
+    Resource: aws_security_group.web_sg
+    Description: None
+
+ 3. CKV_AWS_277: Ensure no security groups allow ingress from 0.0.0.0:0 to port -1
+    Resource: aws_security_group.web_sg
+    Description: None
+
+ 4. CKV_AWS_46: Ensure no hard-coded secrets exist in EC2 user data
+    Resource: aws_instance.web_server
+    Description: None
+
+ 5. CKV_AWS_88: EC2 instance should not have public IP.
+    Resource: aws_instance.web_server
+    Description: None
+
+ 6. CKV_AWS_41: Ensure no hard coded AWS access key and secret key exists in provider
+    Resource: aws.default
+    Description: None
+
+ 7. CKV_AWS_93: Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)
+    Resource: aws_s3_bucket.example
+    Description: None
+
+ 8. CKV_AWS_24: Ensure no security groups allow ingress from 0.0.0.0:0 to port 22
+    Resource: aws_security_group.web
+    Description: None
+
+ 9. CKV_AWS_25: Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389
+    Resource: aws_security_group.web
+    Description: None
+
+10. CKV_AWS_277: Ensure no security groups allow ingress from 0.0.0.0:0 to port -1
+    Resource: aws_security_group.web
+    Description: None
+
+11. CKV_AWS_46: Ensure no hard-coded secrets exist in EC2 user data
+    Resource: aws_instance.web
+    Description: None
+
+12. CKV_AWS_88: EC2 instance should not have public IP.
+    Resource: aws_instance.web
+    Description: None
+
+13. CKV_AWS_41: Ensure no hard coded AWS access key and secret key exists in provider
+    Resource: aws.default
+    Description: None
+
+14. CKV_AWS_41: Ensure no hard coded AWS access key and secret key exists in provider
+    Resource: aws.default
+    Description: None
+
+15. CKV_AWS_93: Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)
+    Resource: aws_s3_bucket.framke_results
+    Description: None
+
+16. CKV_AWS_41: Ensure no hard coded AWS access key and secret key exists in provider
+    Resource: aws.default
+    Description: None
+
+17. CKV_AWS_93: Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)
+    Resource: aws_s3_bucket.test
+    Description: None
+
+18. CKV2_AWS_5: Ensure that Security Groups are attached to another resource
+    Resource: aws_security_group.web_sg
+    Description: None
+
+19. CKV2_AWS_5: Ensure that Security Groups are attached to another resource
+    Resource: aws_security_group.web
+    Description: None
+
+20. CKV_AWS_20: S3 Bucket has an ACL defined which allows public READ access.
+    Resource: aws_s3_bucket.web_assets
+    Description: None
+
+21. CKV_AWS_20: S3 Bucket has an ACL defined which allows public READ access.
+    Resource: aws_s3_bucket.example
+    Description: None
+
+22. CKV_AWS_20: S3 Bucket has an ACL defined which allows public READ access.
+    Resource: aws_s3_bucket.framke_results
+    Description: None
+
+23. CKV_AWS_20: S3 Bucket has an ACL defined which allows public READ access.
+    Resource: aws_s3_bucket.test
+    Description: None
+
+24. CKV_AWS_57: S3 Bucket has an ACL defined which allows public WRITE access.
+    Resource: aws_s3_bucket.web_assets
+    Description: None
+
+25. CKV_AWS_57: S3 Bucket has an ACL defined which allows public WRITE access.
+    Resource: aws_s3_bucket.example
+    Description: None
+
+26. CKV_AWS_57: S3 Bucket has an ACL defined which allows public WRITE access.
+    Resource: aws_s3_bucket.framke_results
+    Description: None
+
+27. CKV_AWS_57: S3 Bucket has an ACL defined which allows public WRITE access.
+    Resource: aws_s3_bucket.test
+    Description: None
+
+28. CKV_AWS_19: Ensure all data stored in the S3 bucket is securely encrypted at rest
+    Resource: aws_s3_bucket.web_assets
+    Description: None
+
+29. CKV_AWS_19: Ensure all data stored in the S3 bucket is securely encrypted at rest
+    Resource: aws_s3_bucket.framke_results
+    Description: None
+
+30. CKV_AWS_19: Ensure all data stored in the S3 bucket is securely encrypted at rest
+    Resource: aws_s3_bucket.test
+    Description: None
+
+31. CKV_AWS_19: Ensure all data stored in the S3 bucket is securely encrypted at rest
+    Resource: aws_s3_bucket.example
+    Description: None
+
