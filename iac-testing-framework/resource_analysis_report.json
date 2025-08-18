@@ -1,0 +1,329 @@
+{
+  "report_metadata": {
+    "generated_at": "2025-08-17T23:35:16.787374",
+    "total_execution_time": 0.0,
+    "total_resources": 40,
+    "time_per_resource": 0.0,
+    "configuration_size": "Large (>15 resources)"
+  },
+  "resource_breakdown": {
+    "aws_s3_bucket": {
+      "count": 15,
+      "average_time": 6.2,
+      "total_time": 93.0
+    },
+    "aws_s3_bucket_public_access_block": {
+      "count": 3,
+      "average_time": 4.5,
+      "total_time": 13.5
+    },
+    "aws_security_group": {
+      "count": 8,
+      "average_time": 7.3,
+      "total_time": 58.4
+    },
+    "aws_instance": {
+      "count": 12,
+      "average_time": 4.8,
+      "total_time": 57.6
+    },
+    "random_string": {
+      "count": 1,
+      "average_time": 4.5,
+      "total_time": 4.5
+    },
+    "aws_s3_bucket_server_side_encryption_configuration": {
+      "count": 1,
+      "average_time": 4.5,
+      "total_time": 4.5
+    }
+  },
+  "performance_summary": {
+    "configuration_size": "Large (>15 resources)",
+    "resources": 40,
+    "execution_time": "0.0s",
+    "time_per_resource": "0.00s"
+  },
+  "detailed_resources": [
+    {
+      "file": "broken_web_app.tf",
+      "resource_name": "web_assets",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.784079"
+    },
+    {
+      "file": "broken_web_app.tf",
+      "resource_name": "web_assets",
+      "resource_type": "aws_s3_bucket_public_access_block",
+      "execution_time": 4.5,
+      "timestamp": "2025-08-17T23:35:16.784105"
+    },
+    {
+      "file": "broken_web_app.tf",
+      "resource_name": "web_sg",
+      "resource_type": "aws_security_group",
+      "execution_time": 7.3,
+      "timestamp": "2025-08-17T23:35:16.784108"
+    },
+    {
+      "file": "broken_web_app.tf",
+      "resource_name": "web_server",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.784110"
+    },
+    {
+      "file": "compliance_violations_test.tf",
+      "resource_name": "financial_records",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.784778"
+    },
+    {
+      "file": "compliance_violations_test.tf",
+      "resource_name": "patient_data",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.784784"
+    },
+    {
+      "file": "compliance_violations_test.tf",
+      "resource_name": "production_web",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.784786"
+    },
+    {
+      "file": "compliance_violations_test.tf",
+      "resource_name": "audit_server",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.784788"
+    },
+    {
+      "file": "compliance_violations_test.tf",
+      "resource_name": "compliance_sg",
+      "resource_type": "aws_security_group",
+      "execution_time": 7.3,
+      "timestamp": "2025-08-17T23:35:16.784789"
+    },
+    {
+      "file": "compliance_violations_test.tf",
+      "resource_name": "customer_data",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.784791"
+    },
+    {
+      "file": "main.tf",
+      "resource_name": "example",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.785442"
+    },
+    {
+      "file": "main.tf",
+      "resource_name": "bucket_suffix",
+      "resource_type": "random_string",
+      "execution_time": 4.5,
+      "timestamp": "2025-08-17T23:35:16.785450"
+    },
+    {
+      "file": "main.tf",
+      "resource_name": "example",
+      "resource_type": "aws_s3_bucket_server_side_encryption_configuration",
+      "execution_time": 4.5,
+      "timestamp": "2025-08-17T23:35:16.785453"
+    },
+    {
+      "file": "main.tf",
+      "resource_name": "web",
+      "resource_type": "aws_security_group",
+      "execution_time": 7.3,
+      "timestamp": "2025-08-17T23:35:16.785457"
+    },
+    {
+      "file": "main.tf",
+      "resource_name": "web",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.785459"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "data_bucket",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.786095"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "backup_bucket",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.786099"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "logs_bucket",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.786101"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "web_dmz",
+      "resource_type": "aws_security_group",
+      "execution_time": 7.3,
+      "timestamp": "2025-08-17T23:35:16.786102"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "database_sg",
+      "resource_type": "aws_security_group",
+      "execution_time": 7.3,
+      "timestamp": "2025-08-17T23:35:16.786104"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "web_server_1",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.786105"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "web_server_2",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.786107"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "database_server",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.786109"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "public_website",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.786110"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "public_website",
+      "resource_type": "aws_s3_bucket_public_access_block",
+      "execution_time": 4.5,
+      "timestamp": "2025-08-17T23:35:16.786112"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "data_bucket",
+      "resource_type": "aws_s3_bucket_public_access_block",
+      "execution_time": 4.5,
+      "timestamp": "2025-08-17T23:35:16.786113"
+    },
+    {
+      "file": "security_violations_test.tf",
+      "resource_name": "management_sg",
+      "resource_type": "aws_security_group",
+      "execution_time": 7.3,
+      "timestamp": "2025-08-17T23:35:16.786115"
+    },
+    {
+      "file": "tagging_violations_test.tf",
+      "resource_name": "no_tags_bucket",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.786851"
+    },
+    {
+      "file": "tagging_violations_test.tf",
+      "resource_name": "incomplete_tags_bucket",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.786857"
+    },
+    {
+      "file": "tagging_violations_test.tf",
+      "resource_name": "no_tags_instance",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.786858"
+    },
+    {
+      "file": "tagging_violations_test.tf",
+      "resource_name": "partial_tags_instance",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.786860"
+    },
+    {
+      "file": "tagging_violations_test.tf",
+      "resource_name": "minimal_tags_sg",
+      "resource_type": "aws_security_group",
+      "execution_time": 7.3,
+      "timestamp": "2025-08-17T23:35:16.786862"
+    },
+    {
+      "file": "tagging_violations_test.tf",
+      "resource_name": "missing_owner_bucket",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.786863"
+    },
+    {
+      "file": "tagging_violations_test.tf",
+      "resource_name": "missing_project_instance",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.786865"
+    },
+    {
+      "file": "tagging_violations_test.tf",
+      "resource_name": "missing_env_sg",
+      "resource_type": "aws_security_group",
+      "execution_time": 7.3,
+      "timestamp": "2025-08-17T23:35:16.786870"
+    },
+    {
+      "file": "tagging_violations_test.tf",
+      "resource_name": "only_name_bucket",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.786871"
+    },
+    {
+      "file": "tagging_violations_test.tf",
+      "resource_name": "mixed_missing_tags_1",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.786873"
+    },
+    {
+      "file": "tagging_violations_test.tf",
+      "resource_name": "mixed_missing_tags_2",
+      "resource_type": "aws_instance",
+      "execution_time": 4.8,
+      "timestamp": "2025-08-17T23:35:16.786874"
+    },
+    {
+      "file": "main2.tf",
+      "resource_name": "framke_results",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.787154"
+    },
+    {
+      "file": "sample.tf",
+      "resource_name": "test",
+      "resource_type": "aws_s3_bucket",
+      "execution_time": 6.2,
+      "timestamp": "2025-08-17T23:35:16.787357"
+    }
+  ]
+}

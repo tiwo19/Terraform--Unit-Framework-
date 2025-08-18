@@ -1,0 +1,68 @@
+{
+  "report_metadata": {
+    "generated_at": "2025-08-17T23:30:38.975160",
+    "terraform_directory": "test_cases",
+    "analysis_duration_seconds": 0.002,
+    "framework_version": "2.0.0"
+  },
+  "system_performance_context": {
+    "cpu_count": 8,
+    "memory_total_gb": 15.75,
+    "memory_available_gb": 1.98,
+    "python_version": "1755428912.9732363",
+    "platform": "nt"
+  },
+  "infrastructure_analysis": {
+    "total_files": 0,
+    "files_by_type": {},
+    "resources_by_file": {},
+    "resources_by_type": {},
+    "total_resources": 0,
+    "complexity_metrics": {
+      "resources_per_file": 0,
+      "unique_resource_types": 0,
+      "resource_type_diversity": 0,
+      "estimated_complexity_score": 0
+    }
+  },
+  "resource_specific_performance": {
+    "total_resources_analyzed": 0,
+    "average_time_per_resource": 0,
+    "fastest_resource": null,
+    "slowest_resource": null,
+    "detailed_breakdown": []
+  },
+  "module_performance_analysis": {
+    "modules_analyzed": 1,
+    "total_processing_time": 0.001,
+    "highest_throughput_module": {
+      "module": "static_analysis",
+      "operation": "full_scan",
+      "execution_time_seconds": 0.001,
+      "resources_processed": 0,
+      "throughput_resources_per_second": 0.0,
+      "memory_usage_mb": 0.0,
+      "success": true
+    },
+    "detailed_breakdown": [
+      {
+        "module": "static_analysis",
+        "operation": "full_scan",
+        "execution_time_seconds": 0.001,
+        "resources_processed": 0,
+        "throughput_resources_per_second": 0.0,
+        "memory_usage_mb": 0.0,
+        "success": true
+      }
+    ]
+  },
+  "scalability_analysis": {
+    "error": "No resource data available for predictions"
+  },
+  "optimization_recommendations": [
+    {
+      "type": "error",
+      "message": "No performance data available for recommendations"
+    }
+  ]
+}
